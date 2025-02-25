@@ -1,0 +1,31 @@
+<div class="portfolio-container">
+    <!-- Include Navbar -->
+    {% include "partials/navigation.html" %}
+    
+    <!-- Content Area (Full Width) -->
+    <div class="max-w-6xl mx-auto p-4 md:p-6 lg:p-8">
+        <!-- Section Content -->
+        <section id="about" class="section-content">
+            {% include "partials/about.html" %}
+        </section>
+
+        <!-- Other sections remain hidden until selected -->
+        <section id="experience" class="section-content hidden">
+            <div data-aos="fade-up" class="space-y-8">
+                {% include "partials/technology.html" %}
+            </div>
+        </section>
+
+        <section id="projects" class="section-content hidden">
+            <div data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {% include "partials/project-cards.html" %}
+            </div>
+        </section>
+        <!-- Contact Section Template for Django -->
+        <section id="contact" class="section-content">
+            <div data-aos="fade-up" class="space-y-12">
+                {% include "partials/contact.html" %}
+            </div>
+        </section>
+    </div>
+</div>

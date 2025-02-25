@@ -1,0 +1,63 @@
+/* Agregar estos estilos a tu archivo CSS personalizado o en una etiqueta <style> */
+
+:root {
+    --nav-bg: linear-gradient(to right, #111827, #000000);
+    --border-color: #1f2937;
+    --text-color: #f3f4f6;
+    --hover-bg: rgba(255, 255, 255, 0.05);
+    --active-indicator: linear-gradient(to right, #6366f1, #2dd4bf);
+  }
+  
+  .dark-mode {
+    --nav-bg: linear-gradient(to right, #000000, #0f172a);
+    --border-color: #0f172a;
+    --text-color: #ffffff;
+    --hover-bg: rgba(255, 255, 255, 0.1);
+    --active-indicator: linear-gradient(to right, #8b5cf6, #3b82f6);
+  }
+  
+  /* Animación para los elementos de la navegación */
+  .nav-tab a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--active-indicator);
+    transition: width 0.3s ease, left 0.3s ease;
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  
+  .nav-tab a:hover::before,
+  .nav-tab a.active::before {
+    width: 80%;
+    opacity: 1;
+  }
+  
+  /* Efecto de glassmorphism mejorado para la barra de navegación */
+  @supports (backdrop-filter: blur(12px)) {
+    .bg-gradient-to-r.backdrop-blur-md {
+      backdrop-filter: blur(12px);
+      background-color: rgba(0, 0, 0, 0.75); /* Fallback para navegadores que no soportan gradientes */
+      background-image: var(--nav-bg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* Animación para las pestañas activas */
+  .nav-tab a.active .absolute.inset-0 {
+    background: var(--hover-bg);
+    transform: scale(1);
+  }
+  
+  /* Efecto de resplandor para los elementos interactivos */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(99, 102, 241, 0); }
+    50% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.5); }
+  }
+  
+  .nav-tab a.active {
+    animation: pulse-glow 2s infinite;
+  }

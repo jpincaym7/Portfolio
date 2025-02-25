@@ -1,0 +1,23 @@
+.hover-glow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3), 0 0 30px rgba(20, 184, 166, 0.2);
+}
+
+.hover-glow-sm:hover {
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.tech-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-pill {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tech-pill:hover {
+  transform: translateY(-5px);
+}

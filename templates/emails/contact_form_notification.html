@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{subject}}</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Encabezado */
+        .header {
+            background-color: #3498db;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+        
+        .header h1 {
+            color: white;
+            margin: 15px 0 0;
+            font-size: 24px;
+        }
+        
+        /* Contenido */
+        .content {
+            padding: 30px;
+        }
+        
+        .message {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .message p {
+            margin: 0 0 15px;
+        }
+        
+        .message p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sender-info {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .sender-info p {
+            margin: 5px 0;
+        }
+        
+        /* Botón */
+        .button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Pie de página */
+        .footer {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .social-links {
+            margin: 15px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 8px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* Responsivo */
+        @media screen and (max-width: 550px) {
+            .container {
+                width: 100%;
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150x50" alt="Logo">
+            <h1>{{subject}}</h1>
+        </div>
+        
+        <div class="content">
+            <p>Estimado administrador,</p>
+            
+            <p>Has recibido un nuevo mensaje a través del formulario de contacto.</p>
+            
+            <div class="message">
+                <p><strong>Nombre:</strong> {{name}}</p>
+                <p><strong>Email:</strong> <a href="mailto:{{email}}">{{email}}</a></p>
+                <p><strong>Asunto:</strong> {{subject}}</p>
+                <p><strong>Mensaje:</strong></p>
+                <p>{{message}}</p>
+            </div>
+            
+            <a href="#" class="button">Responder mensaje</a>
+            
+            <div class="sender-info">
+                <p>Este mensaje fue enviado el {{date}} a las {{time}}.</p>
+                <p>IP: {{ip_address}}</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Tu Empresa. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a> | 
+                <a href="#">Twitter</a> | 
+                <a href="#">Instagram</a>
+            </div>
+            <p>Si no deseas recibir estos correos, puedes <a href="#">darte de baja</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

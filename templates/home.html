@@ -1,0 +1,83 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}Jordy Pincay - Software Engineer{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/card.css' %}">
+<style>
+    .os-window {
+        background: rgba(30, 30, 30, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .window-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .window-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .dot-red { background-color: #ff5f56; }
+    .dot-yellow { background-color: #ffbd2e; }
+    .dot-green { background-color: #27c93f; }
+
+    .contact-info {
+        padding: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 16px;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0;
+        color: #a0aec0;
+        font-size: 0.9rem;
+    }
+
+    .contact-icon {
+        width: 16px;
+        height: 16px;
+        opacity: 0.7;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<div class="relative min-h-screen overflow-hidden">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="os-window">
+            <div class="window-header">
+                <div class="window-dot dot-red"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+                <div class="ml-4 text-sm text-gray-400">Jordy Pincay - Portfolio</div>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12 p-6">
+                {% include "partials/sidebar.html" %}
+
+                <!-- Main Content -->
+                <main class="lg:w-2/3 xl:w-3/4 space-y-12">
+                    {% include "partials/main-content.html" %}
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

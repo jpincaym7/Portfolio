@@ -1,0 +1,147 @@
+{% load static %}
+{% load dict_filters %}
+
+<section class="relative py-16 overflow-hidden">
+    <!-- Background gradient effect -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-50"></div>
+    
+    <!-- Main content container -->
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section header -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+                    Technical Skills
+                </span>
+            </h2>
+            <div class="w-24 h-1 mx-auto bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="mb-12">
+            <div class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+                {% for category in technology_categories %}
+                <button id="tab-{{ category.id }}"
+                    class="tech-category-btn group relative px-6 py-3 rounded-xl backdrop-blur-xl
+                        {% if forloop.first %}
+                            bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-2 border-blue-500/30
+                        {% else %}
+                            bg-white/5 border-2 border-transparent hover:border-blue-500/30
+                        {% endif %}
+                        transition-all duration-300 ease-in-out"
+                    data-category="{{ category.id }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    aria-controls="panel-{{ category.id }}"
+                    role="tab">
+                    <span class="relative z-10 flex items-center space-x-2 font-medium 
+                        {% if forloop.first %}text-white{% else %}text-gray-400{% endif %}
+                        group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-{{ category.icon_code }}" style="color: {{ category.icon_color }};"></i>
+                        <span>{{ category.name }}</span>
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Technology Cards Container -->
+        <div class="space-y-16">
+            {% for category in technology_categories %}
+            <div id="panel-{{ category.id }}"
+                class="tech-category-panel {% if not forloop.first %}hidden{% endif %}"
+                role="tabpanel"
+                aria-labelledby="tab-{{ category.id }}">
+
+                <!-- Main Technologies -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold mb-8 text-white flex items-center">
+                        <i class="fa {{ category.icon_code }} mr-3" style="color: {{ category.icon_color }};"></i>
+                        Primary {{ category.name }} Skills
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {% for tech in category.technologies.all %}
+                        {% if tech.is_main_tech %}
+                        <div class="group relative">
+                            <!-- Card background with animated gradient -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            
+                            <!-- Card content -->
+                            <div class="relative p-6 rounded-2xl backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+                                {% with level_color=level_color_map|get_item:tech.expertise.level %}
+                                <div class="flex justify-between items-start mb-6">
+                                    <h4 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
+                                        {{ tech.name }}
+                                    </h4>
+                                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-{{ level_color }}/20 text-{{ level_color }} border border-{{ level_color }}/30">
+                                        {{ tech.expertise.level }}
+                                    </span>
+                                </div>
+
+                                <!-- Animated progress bar -->
+                                <div class="mb-6">
+                                    <div class="relative h-2.5 w-full bg-gray-700/50 rounded-full overflow-hidden">
+                                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transform transition-transform duration-1000 ease-out"
+                                            style="width: {{ tech.proficiency }}%; transform-origin: left">
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 text-right text-sm text-gray-400">
+                                        {{ tech.proficiency }}%
+                                    </div>
+                                </div>
+
+                                {% if tech.subtechnologies.all %}
+                                <div class="space-y-2">
+                                    <div class="flex flex-wrap gap-2">
+                                        {% for subtech in tech.subtechnologies.all %}
+                                        <span class="px-3 py-1.5 bg-white/5 backdrop-blur-lg rounded-lg text-sm text-gray-300 border border-white/10 hover:border-white/20 transition-colors duration-300">
+                                            {{ subtech.name }}
+                                        </span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Other Technologies -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-white flex items-center">
+                        <i class="fas fa-code-branch mr-3 text-gray-400"></i>
+                        Other {{ category.name }} Skills
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {% for tech in category.technologies.all %}
+                        {% if not tech.is_main_tech %}
+                        <div class="group relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                            <div class="relative p-4 rounded-xl backdrop-blur-lg border border-white/10 hover:border-white/20 transition-all duration-300">
+                                {% with level_color=level_color_map|get_item:tech.expertise.level %}
+                                <h4 class="text-lg font-medium text-white text-center mb-4 group-hover:text-blue-400 transition-colors duration-300">
+                                    {{ tech.name }}
+                                </h4>
+                                <div class="w-full h-2 bg-gray-700/50 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transform transition-transform duration-1000 ease-out"
+                                        style="width: {{ tech.proficiency }}%; transform-origin: left">
+                                    </div>
+                                </div>
+                                <span class="block mt-3 text-sm font-medium text-center text-{{ level_color }}">
+                                    {{ tech.expertise.level }}
+                                </span>
+                                {% endwith %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
